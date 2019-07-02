@@ -9,6 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+// const DashboardPlugin = require('webpack-dashboard/plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -45,6 +47,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    // new DashboardPlugin(),
+    // new CleanWebpackPlugin(),
+
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery: 'jquery',
+      Vue: ['vue/dist/vue.esm.js', 'default'],
+      moment: 'moment',
+    }),
+
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
